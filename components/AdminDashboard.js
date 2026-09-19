@@ -3,11 +3,7 @@
 import { useState } from 'react';
 import { BarChart3, CheckCircle2, DollarSign, LogOut, Plus, Printer, Settings, Truck, Users, X } from 'lucide-react';
 
-const initialBookings = [
-  { id: 'JR-1042', name: 'Aisha M.', phone: '078 222 1098', area: 'Mitchells Plain → Muizenberg', service: 'Furniture move', price: 599, driver: 'T. Klaasen', status: 'assigned' },
-  { id: 'JR-1041', name: 'Jason P.', phone: '076 440 3120', area: 'Strandfontein', service: 'Junk removal', price: 450, driver: 'Unassigned', status: 'pending' },
-  { id: 'JR-1040', name: 'Nadia S.', phone: '082 180 0983', area: 'Muizenberg → CBD', service: 'Business delivery', price: 820, driver: 'S. Jacobs', status: 'done' }
-];
+
 const initialDrivers = [{ id: 1, name: 'T. Klaasen', phone: '078 821 4401', vehicle: 'Bakkie', area: 'South Peninsula', rating: 4.9 }, { id: 2, name: 'S. Jacobs', phone: '072 310 2230', vehicle: '4T Truck', area: 'Cape Town CBD', rating: 4.8 }];
 
 export default function AdminDashboard() {

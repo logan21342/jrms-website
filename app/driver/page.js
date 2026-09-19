@@ -1,3 +1,3 @@
-import DriverDashboard from '@/components/DriverDashboard';
+import { redirect } from 'next/navigation';
 
-export default function DriverPage() { return <DriverDashboard />; }
+export default function DriverPage() { redirect('/driver/login'); }

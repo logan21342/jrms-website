@@ -10,7 +10,8 @@ create table if not exists public.drivers (
   car_model text,
   car_plate text,
   password_hash text,
-  status text default 'pending' check (status in ('pending', 'approved', 'active')),
+  approved_at timestamptz,
+  status text default 'pending' check (status in ('pending', 'approved', 'active', 'rejected')),
   total_earnings numeric default 0,
   total_trips int default 0,
   name text,
@@ -25,6 +26,7 @@ alter table public.drivers add column if not exists id_number text;
 alter table public.drivers add column if not exists car_model text;
 alter table public.drivers add column if not exists car_plate text;
 alter table public.drivers add column if not exists password_hash text;
+alter table public.drivers add column if not exists approved_at timestamptz;
 alter table public.drivers add column if not exists status text default 'pending';
 alter table public.drivers add column if not exists total_earnings numeric default 0;
 alter table public.drivers add column if not exists total_trips int default 0;
@@ -33,6 +35,8 @@ alter table public.drivers add column if not exists vehicle text;
 alter table public.drivers add column if not exists area text;
 alter table public.drivers add column if not exists rating numeric default 5;
 update public.drivers set full_name = coalesce(full_name, name), car_model = coalesce(car_model, vehicle) where full_name is null or car_model is null;
+alter table public.drivers drop constraint if exists drivers_status_check;
+alter table public.drivers add constraint drivers_status_check check (status in ('pending', 'approved', 'active', 'rejected'));
 alter table public.drivers alter column total_earnings set default 0;
 alter table public.drivers alter column total_trips set default 0;
 

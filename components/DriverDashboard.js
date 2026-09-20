@@ -18,7 +18,7 @@ export default function DriverDashboard() {
       if (!user) { router.replace('/driver/login'); return; }
       const [{ data: driverData, error: driverError }, { data: bookingData, error: bookingError }] = await Promise.all([
         supabase.from('drivers').select('*').eq('id', user.id).single(),
-        supabase.from('bookings').select('*').eq('driver_id', user.id).order('created_at', { ascending: false }),
+        supabase.from('bookings').select('*').eq('driver_id', user.id).eq('status', 'assigned').order('created_at', { ascending: false }),
       ]);
       if (driverError || bookingError) { if (mounted) setError(driverError?.message || bookingError?.message); return; }
       if (driverData.status !== 'active') { await supabase.auth.signOut(); router.replace('/driver/login?status=pending'); return; }
